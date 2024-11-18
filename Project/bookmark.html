@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog - View more and Bookmark Destinations</title>
+
+</head>
+<style>
+        .destination-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+    gap: 50px; /* Space between cards */
+    max-width: 1300px; /* Maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Space on the left and right of the page */
+}
+
+.destination-card {
+  background-color: #0d1424;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2px;
+}
+
+h3{
+  color: #428ed9;
+  font-size: large;
+  font-weight: 700;
+}
+
+h2 {
+            text-align: center;      /* Centers the h2 */
+            color: #3498db;          /* Changes text color */
+            font-size: 54px;         /* Medium size font */
+            font-family: 'Georgia', serif; 
+            margin-top: 40px;
+           margin-bottom: 30px;
+        }
+h4 {
+    text-align: center; /* Centers the text */
+    color: #428ed9; /* Change this to your preferred color */
+    font-weight: bold; /* Makes the text bold */
+    font-size: 24px; /* Increases the size of the text */
+    font-family: 'Arial', sans-serif; /* Change to your preferred font style */
+    margin-top: 20px; /* Adjusts the spacing above the h4 */
+    margin-bottom: 20px; /* Adjusts the spacing below the h4 */
+}
+
+.hidden-detail {
+    display: none; 
+}
+
+/* Compare Card Styling */
+.compare-card {
+  background-color: #0d1424;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 500px; /* Compact width */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+    height: auto; /* No fixed height to avoid scrolling */
+}
+
+/* Card Header to display Title and Close button in one line */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close Button Styling */
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 50%;
+}
+
+/* Compare Image Styling */
+.compare-image {
+    width: 100%; /* Make the image smaller */
+    max-width: 500px; /* Ensure the image doesn't stretch */
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Overlay styling */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #89b1d9;
+}
+
+
+        .destination-image {
+            width: 100%;
+            height: 200px;
+          
+            border-radius: 5px;
+            padding: 2px 2px 2px 2px;
+        }
+        .btn {
+            padding: 0.75rem 1rem;
+  font-size: 0.7rem;
+  color: var(--white);
+  background-color: transparent;
+  cursor: pointer;
+        }
+        /*.compare-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: fixed;
+            display: none; /* Initially hidden }*/
+        
+       /* .close-close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+            color: #f00;
+        }*/
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none; /* Initially hidden */
+            z-index: 500; /* Behind the compare card */
+        }
+        .bookmarked-section {
+            margin-top: 30px;
+        }
+        .bookmarked-section h2 {
+            color: #e4ebe6;
+        }
+        .bookmarked-destination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adds space between multiple bookmarks */
+}
+
+.bookmarked-destination p {
+    margin: 0;
+    color: #007BFF; 
+    font-weight: 700;
+}
+
+.delete-btn {
+    background-color: #ff0000;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+     /*   .bookmarked-destination {
+          background-color:#0d1424;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .delete-btn {
+            background-color: #ff0000;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }*/
+        
+:root {
+  --primary-color: #0a0d14;
+  --primary-color-light: #20242f;
+  --secondary-color: #f49e09;
+  --extra-light: rgba(255, 255, 255, 0.5);
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lisu Bosa", serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+
+nav {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid var(--extra-light);
+}
+
+.nav__bar {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.nav__logo a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+}
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link a {
+  padding: 1.5rem 5px;
+  font-weight: 500;
+  color: var(--white);
+  transition: 0.3s;
+}
+
+.link a:hover {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.link span {
+  padding: 1rem 0;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.discover__btn {
+  padding: 0.75rem 1rem;
+  outline: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: transparent;
+  border: 1px solid var(--white);
+  cursor: pointer;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+</style>
+<body>
+    <header id="home">
+        <nav>
+            <div class="nav__bar">
+                <div class="nav__logo"><a href="#">WanderHive</a></div>
+                <ul class="nav__links">
+                    <li class="link"><a href="home.html">Home</a></li>
+                    <li class="link"><a href="blog.php">Blog</a></li>
+                    <li class="link"><a href="bookmark.html">Discover</a></li>
+                    <li class="link"><a href="calender.html">Hot topic's</a></li>
+                    <li> 
+                        <button class="discover__btn">
+                            <a href="logout.php">Logout</a> 
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <h2>Travel Points</h2>
+    <h4>Your Destination for Travel Inspiration, Education and Innovation</h4>
+
+    <div class="destination-container">
+    <div class="destination-card" data-destination="bhutan">
+        <img class="destination-image" src="bhutan.avif" >
+        <h3>Bhutan</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Varies by altitude; Subtropical to Alpine</li>
+            <li><strong>Seasons:</strong> Summer; Monsoon; Winter</li>
+            <li><strong>Climate:</strong> Warm summers; Cold winters</li>
+            <li class="hidden-detail"><strong>Mountain Regions:</strong> Cold; Snowy</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Paro; Thimphu; Punakha</li>
+            <li class="hidden-detail"><strong>Cost:</strong> High-end tourism; Minimum daily tariff</li>
+            <li class="hidden-detail"><strong>Food:</strong> Ema Datshi; Red Rice; Momos</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('bhutan')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('bhutan')">Bookmark</button>
+    </div>
+
+
+    <div class="destination-card" data-destination="Vietnam">
+        <img class="destination-image" src="vietnam.avif">
+        <h3>Vietnam</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Tropical; Humid</li>
+            <li><strong>Seasons:</strong> Wet and dry seasons</li>
+            <li><strong>Climate:</strong> Hot summers; Mild winters</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Ha Long Bay; Hanoi</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Very affordable; Cheap street food</li>
+            <li class="hidden-detail"><strong>Food:</strong> Pho; Banh Mi</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Vietnam')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Vietnam')">Bookmark</button>
+    </div>
+
+    
+    <div class="destination-card" data-destination="California">
+        <img class="destination-image" src="california.avif">
+        <h3>California</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Mediterranean; Coastal cool</li>
+            <li><strong>Seasons:</strong> Mild winters; Warm summers</li>
+            <li><strong>Inland Climate:</strong> Hot; Dry</li>
+            <li class="hidden-detail"><strong>Northern California:</strong> Cooler; Rainy</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Los Angeles; San Francisco; Yosemite</li>
+            <li class="hidden-detail"><strong>Cost:</strong> High; Expensive in urban areas</li>
+            <li class="hidden-detail"><strong>Food:</strong> Tacos; Avocado Toast; In-N-Out Burger</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('California')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('California')">Bookmark</button>
+    </div> 
+
+    <div class="destination-card" data-destination="Netherlands">
+        <img class="destination-image" src="netherlands.avif">
+        <h3>Netherlands</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Maritime; Mild</li>
+            <li><strong>Seasons:</strong> Cool summers; Mild winters</li>
+            <li><strong>Climate:</strong> Windy; Rainy</li>
+            <li class="hidden-detail"><strong>Spring:</strong> Famous for Tulip season</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Amsterdam; Rotterdam; The Hague</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Moderate; Higher in cities</li>
+            <li class="hidden-detail"><strong>Food:</strong> Stroopwafels; Dutch Cheese; Herring</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Netherlands')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Netherlands')">Bookmark</button>
+    </div>
+    <div class="destination-card" data-destination="Aruba">
+        <img class="destination-image" src="aruba.avif">
+        <h3>Aruba</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Dry; Sunny</li>
+            <li><strong>Seasons:</strong> Warm all year</li>
+            <li><strong>Climate:</strong> Tropical; Constant trade winds</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Eagle Beach; Arikok National Park</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Moderate; High-end resorts</li>
+            <li class="hidden-detail"><strong>Food:</strong> Keshi Yena; Fresh seafood</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Aruba')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Aruba')">Bookmark</button>
+    </div>
+  
+    <div class="destination-card" data-destination="Bonaire">
+        <img class="destination-image" src="bonaire-caribbean.jpg">
+        <h3>Bonaire</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Tropical; Warm year-round</li>
+            <li><strong>Seasons:</strong> Dry season; Hurricane season</li>
+            <li><strong>Climate:</strong> Hot; Humid</li>
+            <li class="hidden-detail"><strong>Hurricane Season:</strong> June to November</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Bahamas; Jamaica; Dominican Republic</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Varies; All-inclusive resorts available</li>
+            <li class="hidden-detail"><strong>Food:</strong> Jerk Chicken; Conch; Seafood</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Bonaire')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Bonaire')">Bookmark</button>
+    </div>
+      
+    <div class="destination-card" data-destination="Copenhagen">
+        <img class="destination-image" src="img.avif">
+        <h3>Copenhagen</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Oceanic; Cool summers</li>
+            <li><strong>Seasons:</strong> Four distinct seasons</li>
+            <li><strong>Climate:</strong> Mild winters; Humid</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Nyhavn; Tivoli Gardens</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Expensive; Efficient public transport</li>
+            <li class="hidden-detail"><strong>Food:</strong> Smørrebrød; Danish Pastries</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Copenhagen')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Copenhagen')">Bookmark</button>
+    </div>
+
+    <div class="destination-card" data-destination="Moscow-Russia">
+        <img class="destination-image" src="moscow-russia.jpg">
+        <h3>Moscow, Russia</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Continental; Cold winters</li>
+            <li><strong>Seasons:</strong> Harsh winters; Warm summers</li>
+            <li><strong>Climate:</strong> Snowy winters; Hot summers</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Red Square; Kremlin</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Moderate; Excellent metro system</li>
+            <li class="hidden-detail"><strong>Food:</strong> Borscht; Pelmeni</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Moscow-Russia')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Moscow-Russia')">Bookmark</button>
+    </div>
+
+    <div class="destination-card" data-destination="Taiwan">
+        <img class="destination-image" src="taiwan.avif">
+        <h3>Taiwan </h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Subtropical; Humid</li>
+            <li><strong>Seasons:</strong> Four distinct seasons</li>
+            <li><strong>Northern Climate:</strong> Humid; Mild winters</li>
+            <li class="hidden-detail"><strong>Southern Climate:</strong> Tropical; Warm all year</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Taipei; Taroko Gorge; Sun Moon Lake</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Moderate; Affordable transportation</li>
+            <li class="hidden-detail"><strong>Food:</strong> Bubble Tea; Beef Noodles; Stinky Tofu</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Taiwan')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Taiwan')">Bookmark</button>
+    </div>
+    
+    <div class="destination-card" data-destination="Konya-Turkey">
+        <img class="destination-image" src="konya-Turkey.avif">
+        <h3>Konya, Turkey</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Continental; Hot summers</li>
+            <li><strong>Seasons:</strong> Cold winters; Warm summers</li>
+            <li><strong>Climate:</strong> Dry; Semi-arid</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Mevlana Museum; Alaeddin Hill</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Affordable; Great value for food</li>
+            <li class="hidden-detail"><strong>Food:</strong> Etli Ekmek; Mevlana Pide</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Konya-Turkey')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Konya-Turkey')">Bookmark</button>
+    </div>
+
+    <div class="destination-card" data-destination="New Zealand">
+        <img class="destination-image" src="new zealand.avif">
+        <h3>New Zealand</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Temperate; Varied across islands</li>
+            <li><strong>Seasons:</strong> Four distinct seasons</li>
+            <li><strong>Climate:</strong> Mild; Rainy in some areas</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Milford Sound; Rotorua</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Expensive; Scenic drives</li>
+            <li class="hidden-detail"><strong>Food:</strong> Hangi; Pavlova</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('New Zealand')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('New Zealand')">Bookmark</button>
+    </div>
+    
+    <div class="destination-card" data-destination="Parc Guell-Spain">
+        <img class="destination-image" src="parc-guell-spain.avif">
+        <h3>Parc Guell, Spain</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Mediterranean; Warm summers</li>
+            <li><strong>Seasons:</strong> Mild winters; Hot summers</li>
+            <li><strong>Climate:</strong> Pleasant all year</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Gaudi's Architectural Masterpieces</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Affordable; Public transport friendly</li>
+            <li class="hidden-detail"><strong>Food:</strong> Tapas; Paella</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Parc Guell-Spain')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Parc Guell-Spain')">Bookmark</button>
+    </div>
+    
+    <div class="destination-card" data-destination="Romania">
+        <img class="destination-image" src="romania.jpg">
+        <h3>Romania</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Continental; Warm summers</li>
+            <li><strong>Seasons:</strong> Four distinct seasons</li>
+            <li><strong>Climate:</strong> Cold winters; Warm summers</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Bran Castle; Transylvania</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Affordable; Budget-friendly</li>
+            <li class="hidden-detail"><strong>Food:</strong> Ciorbă; Mămăligă</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Romania')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Romania')">Bookmark</button>
+    </div>
+
+    <div class="destination-card" data-destination="Argentina">
+        <img class="destination-image" src="Argentina.avif" alt="Argentina">
+        <h3>Argentina</h3>
+        <ul class="destination-details">
+            <li><strong>Weather:</strong> Temperate; Varied; Seasonal</li>
+            <li><strong>Seasons:</strong> Opposite; Southern Hemisphere</li>
+            <li><strong>Northern Climate:</strong> Tropical; Humid </li>
+            <li class="hidden-detail"><strong>Patagonia:</strong> Cold; Windy</li>
+            <li class="hidden-detail"><strong>Places to Visit:</strong> Buenos Aires; Iguazu Falls</li>
+            <li class="hidden-detail"><strong>Cost:</strong> Moderate; Budget-Friendly</li>
+           <li class="hidden-detail"><strong>Food:</strong> Asado; Empanadas; Dulce de Leche</li>
+        </ul>
+        <button class="btn compare-btn" onclick="compareDestination('Argentina')">View more</button>
+        <button class="btn bookmark-btn" onclick="toggleBookmark('Aegentina')">Bookmark</button>
+    </div>
+</div>
+    <!-- View more Card Structure -->
+    <div id="compareCard" class="compare-card" style="display: none;">
+        <div class="card-header">
+            <h4 id="compareTitle">Title</h4>
+            <button class="close-btn" onclick="closeCompareCard()">X</button>
+        </div>
+        <img id="compareImage" src="" alt="" class="compare-image">
+        <ul id="compareDescription"></ul>
+    </div>
+    
+    <div id="overlay" style="display:none;"></div>
+    
+    <div class="bookmarked-section">
+        <h2>Your Bookmarked Destinations</h2>
+  
+        <div id="bookmarkedDestinations"></div>
+    </div>
+
+    <script>
+        let bookmarks = [];
+
+function compareDestination(destination) {
+    const compareCard = document.getElementById('compareCard');
+    const compareTitle = document.getElementById('compareTitle');
+    const compareImage = document.getElementById('compareImage');
+    const compareDescription = document.getElementById('compareDescription');
+
+    // Clear the current description content
+    compareDescription.innerHTML = '';
+
+    // Get the full list of all <li> items (hidden + visible) from the selected card
+    const listItems = document.querySelectorAll(`[data-destination="${destination}"] li`);
+
+    // Append each list item to the compare card's description
+    listItems.forEach(function(item) {
+        const li = document.createElement('li');
+        li.innerHTML = item.innerHTML;
+        compareDescription.appendChild(li);
+    });
+
+    // Update the compare card title and image
+    compareTitle.innerText = destination;
+    compareImage.src = document.querySelector(`[data-destination="${destination}"] img`).src;
+
+    // Show the compare card and overlay
+    compareCard.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+// Close compare card
+function closeCompareCard() {
+    document.getElementById('compareCard').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+
+
+        // Fetch bookmarks for the logged-in user
+        function fetchBookmarks() {
+            fetch('get_bookmarks.php')
+                .then(response => response.json())
+                .then(data => {
+                    bookmarks = data;
+                    renderBookmarks();
+                    updateBookmarkButtons();
+                })
+                .catch(error => console.error('Error fetching bookmarks:', error));
+        }
+
+        // Toggle bookmark for a destination
+        function toggleBookmark(destination) {
+            fetch('bookmark.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'destination=' + encodeURIComponent(destination)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    fetchBookmarks(); // Refresh bookmarks after adding/removing
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error toggling bookmark:', error));
+        }
+
+        // Render the user's bookmarks
+        function renderBookmarks() {
+            const bookmarkSection = document.getElementById('bookmarkedDestinations');
+            bookmarkSection.innerHTML = '';
+
+            if (bookmarks.length === 0) {
+                bookmarkSection.innerHTML = '<p>No destinations bookmarked yet.</p>';
+            } else {
+                bookmarks.forEach(destination => {
+                    bookmarkSection.innerHTML += `
+                        <div class="bookmarked-destination">
+                            <p>${destination}</p>
+                            <button class="delete-btn" onclick="deleteBookmark('${destination}')">Delete</button>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Update the bookmark button states
+        function updateBookmarkButtons() {
+            document.querySelectorAll('.destination-card').forEach(card => {
+                const destination = card.dataset.destination;
+                const button = card.querySelector('.bookmark-btn');
+                if (bookmarks.includes(destination)) {
+                    button.classList.add('bookmarked');
+                    button.innerText = 'Bookmarked'; // Displayed if already bookmarked
+                } else {
+                    button.classList.remove('bookmarked');
+                    button.innerText = 'Bookmark'; // Displayed if not bookmarked
+                }
+            });
+        }
+
+   
+
+
+        // Delete a bookmarked destination
+        function deleteBookmark(destination) {
+            fetch('delete_bookmark.php', { // Ensure you have this PHP file to handle deletions
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'destination=' + encodeURIComponent(destination)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Remove the destination from the bookmarks array
+                    bookmarks = bookmarks.filter(item => item !== destination);
+                    renderBookmarks(); // Update the UI
+                    updateBookmarkButtons(); // Update bookmark buttons
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error deleting bookmark:', error));
+        }
+
+        // Fetch bookmarks when the page loads
+        fetchBookmarks();
+    </script>
+
+</body>
+</html>
+
+
+
+

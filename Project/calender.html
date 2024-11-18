@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Event Calendar</title>
+    <style>
+       :root {
+          --primary-color: #0a0d14;
+          --primary-color-light: #20242f;
+          --secondary-color: #f49e09;
+          --extra-light: rgba(255, 255, 255, 0.5);
+          --white: #ffffff;
+          --max-width: 1200px;
+          --header-font: "Lisu Bosa", serif;
+       }
+
+       a {
+          text-decoration: none;
+       }
+
+       body {
+          font-family: "Poppins", sans-serif;
+          color: var(--white);
+          background-color: var(--primary-color);
+       }
+
+       nav {
+          background-color: rgba(0, 0, 0, 0.5);
+          border-bottom: 1px solid var(--extra-light);
+       }
+
+       .nav__bar {
+          max-width: var(--max-width);
+          margin: auto;
+          padding: 1.5rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+       }
+
+       .nav__logo a {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--white);
+       }
+
+       .nav__links {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+       }
+
+       .link a {
+          padding: 1.5rem 5px;
+          font-weight: 500;
+          color: var(--white);
+          transition: 0.3s;
+       }
+
+       .link a:hover {
+          color: var(--secondary-color);
+          border-bottom: 2px solid var(--secondary-color);
+       }
+
+       .discover__btn {
+          padding: 0.75rem 1rem;
+          outline: none;
+          font-size: 1rem;
+          color: var(--white);
+          background-color: transparent;
+          border: 1px solid var(--white);
+          cursor: pointer;
+       }
+
+       h2 {
+          text-align: center;
+          color: #3498db;
+          font-size: 54px;
+          font-family: 'Georgia', serif;
+          margin-top: 40px;
+          margin-bottom: 30px;
+       }
+
+       * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+       }
+
+       h1 {
+          text-align: center;
+          margin-top: 20px;
+       }
+
+       .calendar-container {
+          max-width: 800px;
+          margin: 0 auto;
+       }
+
+       .calendar {
+          margin: 20px auto;
+          background: var(--primary-color);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          padding: 20px;
+          position: relative;
+       }
+
+       .calendar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+       }
+
+       #month-year {
+          font-size: 1.5rem;
+       }
+
+       .days-of-week {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          margin-top: 10px;
+          font-weight: bold;
+          text-align: center;
+       }
+
+       .calendar-days {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          margin-top: 10px;
+       }
+
+       .calendar-days div {
+          width: 100%;
+          padding: 15px;
+          text-align: center;
+          cursor: pointer;
+          border: 1px solid #0f0101;
+          position: relative;
+       }
+
+       .calendar-days div:hover {
+          background-color: #110000;
+       }
+
+       /* Modal for event details */
+       .modal {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.5);
+       }
+
+       .modal-content {
+          background-color: var(--primary-color);
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 60%;
+          border-radius: 10px;
+          text-align: center;
+       }
+
+       .modal-content h3 {
+          color: wheat;
+          text-align: center;      
+            font-size: 34px;        
+            font-family: 'Georgia', serif; 
+            margin-top: 40px;
+           margin-bottom: 30px;
+       }
+
+       .close {
+          color: var(--white);
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+       }
+
+       .close:hover {
+          color: var(--secondary-color);
+       }
+
+       #event-image {
+          width: 50%;
+          border-radius: 8px;
+          margin-top: 10px;
+       }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <nav>
+            <div class="nav__bar">
+                <div class="nav__logo"><a href="#">WanderHive</a></div>
+                <ul class="nav__links">
+                    <li class="link"><a href="home.html">Home</a></li>
+                    <li class="link"><a href="blog.php">Blog</a></li>
+                    <li class="link"><a href="bookmark.html">Discover</a></li>
+                    <li class="link"><a href="calender.html">Hot topic's</a></li>
+                    <li> 
+                        <button class="discover__btn">
+                            <a href="logout.php">Logout</a> 
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="calendar-container">
+        <h2>Event Calendar</h2>
+        <div class="calendar" id="calendar">
+            <div class="calendar-header">
+                <button id="prev-month" onclick="prevMonth()">&#10094;</button>
+                <h2 id="month-year"></h2>
+                <button id="next-month" onclick="nextMonth()">&#10095;</button>
+            </div>
+            <div class="days-of-week">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="calendar-days" class="calendar-days"></div>
+        </div>
+    </div>
+
+    <!-- Modal for event details -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="event-image" src="" alt="Event Image">
+            <h3 id="modal-event-info"></h3>
+        </div>
+    </div>
+
+    <script>
+        const eventDetails = {
+    "11/1/2024": {
+                info: "Oktoberfest in Germany - A famous beer festival celebrated every year in Munich.",
+                img: "event1.avif"
+            },
+    "11/11/2024": {
+                info: "Diwali in India - Festival of Lights celebrated with fireworks, feasts, and decorations.",
+                img: "event2.avif"
+            },
+    "11/28/2024": {
+        info: "Thanksgiving in the USA - A national holiday celebrated with family gatherings and feasts.",
+        img: "event3.avif"
+    },
+    "12/21/2024": {
+        info: "Winter Solstice Celebrations - Various cultures celebrate the longest night of the year.",
+        img: "event9.jpg"
+    },
+    "12/25/2024": {
+        info: "Christmas Markets in Europe - Festive markets with crafts, food, and holiday cheer.",
+        img: "event8.jpg"
+    },
+    "1/1/2025": {
+        info: "New Year's Day Celebrations - Festivities and parades worldwide to welcome the new year.",
+        img: "event5.avif"
+    },
+    "1/20/2025": {
+        info: "Carnival in Brazil - A vibrant festival with parades, music, and dancing in Rio de Janeiro.",
+        img: "event6.avif"
+    },
+    "2/14/2025": {
+        info: "Valentine's Day in Paris - Celebrating love in the romantic city with special events.",
+        img: "event7.jpg"
+    },
+    "2/17/2025": {
+        info: "Mardi Gras in New Orleans - A colorful festival featuring parades, music, and delicious food.",
+        img: "event10.avif"
+    },
+    "3/17/2025": {
+        info: "St. Patrick's Day in Dublin - Celebrations with parades, music, and cultural events.",
+        img: "event11.jpg"
+    },
+    "3/20/2025": {
+        info: "Holi Festival in India - The festival of colors celebrated with vibrant powders and water.",
+        img: "event12.jpg"
+    },
+        };
+
+        const monthImages = {
+            "October 2024": "",
+            "November 2024": "",
+            "December 2024": "",
+            "January 2025": "",
+            "February 2025": "feb.jpg",
+            "March 2025": "march.jpg",
+            "April 2025": "",
+            "May 2025": "may.jpg",
+        };
+
+        const today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+
+        const months = [
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const monthYear = document.getElementById("month-year");
+        const calendarDays = document.getElementById("calendar-days");
+
+        const eventModal = document.getElementById("eventModal");
+        const modalEventInfo = document.getElementById("modal-event-info");
+        const eventImage = document.getElementById("event-image");
+        const calendarDiv = document.getElementById("calendar");
+
+        currentMonth = 9; // October (0-based index)
+        currentYear = 2024;
+
+        function generateCalendar(month, year) {
+            calendarDays.innerHTML = "";
+            const firstDay = new Date(year, month).getDay();
+            const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+            const monthKey = `${months[month]} ${year}`;
+            monthYear.innerHTML = monthKey;
+
+            // Set background image for the current month
+            calendarDiv.style.backgroundImage = `url(${monthImages[monthKey]})`;
+            calendarDiv.style.backgroundSize = 'cover';
+
+            // Adding blank days before the start of the month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement("div");
+                calendarDays.appendChild(emptyCell);
+            }
+
+            // Populating the calendar with days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement("div");
+                dayCell.innerHTML = day;
+                const fullDate = `${month + 1}/${day}/${year}`;
+
+                if (eventDetails[fullDate]) {
+                    dayCell.style.backgroundColor = "#93C4E8";
+                    dayCell.title = eventDetails[fullDate].info;
+                    dayCell.addEventListener("click", () => displayEvent(fullDate));
+                }
+
+                calendarDays.appendChild(dayCell);
+            }
+        }
+
+        function displayEvent(date) {
+            eventImage.src = eventDetails[date].img;
+            modalEventInfo.innerHTML = eventDetails[date].info;
+            eventModal.style.display = "block";
+        }
+
+        function closeModal() {
+            eventModal.style.display = "none";
+        }
+
+        function nextMonth() {
+            if (currentMonth === 4 && currentYear === 2025) return; // Limit to May 2025
+            currentMonth = (currentMonth + 1) % 12;
+            if (currentMonth === 0) currentYear += 1;
+            generateCalendar(currentMonth, currentYear);
+        }
+
+        function prevMonth() {
+            if (currentMonth === 9 && currentYear === 2024) return; // Limit to October 2024
+            currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+            if (currentMonth === 11) currentYear -= 1;
+            generateCalendar(currentMonth, currentYear);
+        }
+
+        // Initialize the calendar with October 2024
+        generateCalendar(currentMonth, currentYear);
+    </script>
+</body>
+</html>

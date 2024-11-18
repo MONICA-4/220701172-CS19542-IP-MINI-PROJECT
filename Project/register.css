@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Lisu+Bosa:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #0a0d14;
+  --primary-color-light: #20242f;
+  --secondary-color: #f49e09;
+  --extra-light: rgba(255, 255, 255, 0.5);
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lisu Bosa", serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: var(--header-font);
+  text-align: center;
+}
+
+.section__subheader {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+
+
+/* Common container for register and login forms */
+.register-container, .login-container {
+  width: 450px;
+  padding: 2rem;
+  margin: 100px auto; /* Centers the container vertically */
+  border-radius: 10px;
+  background-color: var(--primary-color-light); /* Light background */
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.9); /* Shadow for depth */
+}
+
+/* Form title for both register and login */
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--white); /* White text for title */
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #757575; /* Bottom border to separate title */
+}
+
+/* Form layout for input fields */
+form {
+  margin: 0 2rem;
+}
+
+/* Input fields common to both register and login */
+input {
+  width: 100%;
+  color: var(--white); /* White text */
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #757575; /* Light gray border */
+  padding-left: 1.5rem;
+  font-size: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  padding: 1% 0;
+  position: relative;
+}
+
+/* Button styling for register and login actions */
+.btn {
+  padding: 0.8rem 1.5rem;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  background: linear-gradient(135deg, #f3308e, #fd7f06); /* Vibrant gradient */
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+/* Styling placeholder text */
+::placeholder {
+  color: var(--extra-light); /* Light gray placeholder text */
+}
+
+/* Error message (optional) */
+.error-message {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.header {
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(135deg,  #f3308e, #fd7f06);
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 50% 20px;
+  border-bottom-right-radius: 50% 20px;
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header h1 {
+  font-size: 4rem;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: #f9f9f9;
+  font-style: italic;
+  margin-top: 10px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}

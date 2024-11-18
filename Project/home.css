@@ -1,0 +1,749 @@
+@import url("https://fonts.googleapis.com/css2?family=Lisu+Bosa:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #0a0d14;
+  --primary-color-light: #20242f;
+  --secondary-color: #f49e09;
+  --extra-light: rgba(255, 255, 255, 0.5);
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lisu Bosa", serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: var(--header-font);
+  text-align: center;
+}
+
+.section__subheader {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--primary-color);
+  background: linear-gradient(135deg, #f3308e,  #fd7f06);
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+header {
+  background-image: linear-gradient(to top, var(--primary-color), transparent),
+    url("assets/header.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+nav {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid var(--extra-light);
+}
+
+.nav__bar {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.nav__logo a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link a {
+  padding: 1.5rem 5px;
+  font-weight: 500;
+  color: var(--white);
+  transition: 0.3s;
+}
+
+.link a:hover {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.link span {
+  padding: 1rem 0;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.header__container {
+  padding: 12rem 1rem;
+}
+
+.header__container h1 {
+  margin-bottom: 1rem;
+  max-width: 700px;
+  font-size: 4rem;
+  font-family: var(--header-font);
+}
+
+.header__container h4 {
+  position: relative;
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.header__container h4::after {
+  position: absolute;
+  content: "";
+  left: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  width: 2rem;
+  background-color: var(--white);
+}
+
+.about__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.about__container :is(.section__header, .section__subheader) {
+  text-align: left;
+}
+
+.about__flex {
+  margin: 2rem 0;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background-color: var(--primary-color-light);
+}
+
+.about__card {
+  flex: 1 1 150px;
+  text-align: center;
+  border-right: 2px solid var(--primary-color);
+}
+
+.about__card:last-child {
+  border: none;
+}
+
+.about__card h4 {
+  margin-bottom: 5px;
+  font-size: 3rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+}
+
+.about__card p {
+  font-size: 0.9rem;
+}
+
+.about__image img {
+  max-width: 450px;
+  margin: auto;
+}
+
+.discover {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+}
+
+.discover__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.discover__card {
+  max-width: 320px;
+  margin: auto;
+}
+
+.discover__card:nth-child(2) {
+  transform: translateY(5rem);
+}
+
+.discover__image {
+  position: relative;
+}
+
+.discover__image::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 50%;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to top, var(--primary-color), transparent);
+}
+
+.discover__card__content {
+  padding: 0 2rem;
+  transform: translateY(-50%);
+}
+
+.discover__card__content h4 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--header-font);
+  color: var(--secondary-color);
+}
+
+.discover__card__content p {
+  margin-bottom: 2rem;
+}
+
+.discover__btn {
+  padding: 0.75rem 1rem;
+  outline: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: transparent;
+  border: 1px solid var(--white);
+  cursor: pointer;
+}
+
+.journals__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.journals__content {
+  padding: 2rem;
+ color: #428ed9;
+}
+
+.journals__author {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.journals__author img {
+  max-width: 30px;
+  border-radius: 100%;
+}
+
+.journals__author p {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.journals__content h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.journals__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.journals__footer p {
+  font-size: 0.9rem;
+  opacity: 0.5;
+  color: #428ed9; /* Change to your desired color */
+}
+
+
+.journals__footer span a {
+  font-size: 1.5rem;
+  color: var(--white);
+  opacity: 0.75;
+}
+
+.journals__btn {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.hero__container p {
+  text-align: center;
+  font-size: 12rem;
+  font-weight: 700;
+  background-image: url("assets/banner.jpg");
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--extra-light);
+}
+
+@media (width < 900px) {
+  .link:not(.search) {
+    display: none;
+  }
+
+  .about__container {
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+
+  .about__container :is(.section__header, .section__subheader) {
+    text-align: center;
+  }
+
+  .about__image {
+    grid-area: 1/1/2/2;
+  }
+
+  .discover__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .journals__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .hero__container p {
+    font-size: 10rem;
+  }
+}
+
+@media (width < 600px) {
+  .header__container {
+    text-align: center;
+  }
+
+  .header__container h4 {
+    margin-left: 0;
+  }
+
+  .about__card {
+    border: none;
+  }
+
+  .discover__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .discover__card:nth-child(2) {
+    transform: translateY(0);
+  }
+
+  .journals__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .hero__container p {
+    font-size: 6rem;
+  }
+
+}
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.section__description {
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.journals__card img {
+  transition: transform 0.3s ease; /* Smooth transition for zoom */
+}
+
+.journals__card:hover img {
+  transform: scale(1.1); /* Slight zoom-in effect */
+}
+
+
+.featured-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
+#blog-posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between blog cards */
+  justify-content: space-between; /* Adjust spacing to make it more balanced */
+}
+
+.post {
+  flex: 1 1 calc(33.333% - 20px); /* Ensure each post takes up about 1/3 of the row minus the gap */
+  box-sizing: border-box; /* Include padding/border in width calculation */
+  max-width: calc(33.333% - 20px); /* Max width for each card */
+  border: 2.5px solid #ccc; /* Thin border for each blog post */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Spacing inside the card */
+  background: none; /* Remove white background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better separation */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth animation */
+}
+
+.post:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.postImg {
+  width: 100%;
+  height: auto;
+  max-height: 250px; /* Make the image smaller */
+  border-radius: 10px; /* Image with rounded corners */
+  object-fit: cover; /* Ensures that the image is cropped properly */
+}
+
+.postInfo {
+  padding: 10px 0;
+}
+
+.postTitle {
+  font-size: 1.2em; /* Smaller font size */
+  font-weight: bold;
+  color: #428ed9; /* Darker color for better readability */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f0f7fc; /* Thin border under title */
+  display: inline-block; /* Inline display for title effect */
+  padding-bottom: 5px; /* Space between title and underline */
+}
+
+.postDesc {
+  font-size: 0.9em; /* Slightly smaller font size */
+  line-height: 1.5;
+  color: #428ed9; /* Softer color for description */
+}
+
+
+.remove-post-btn {
+  background-color: #f9f4f3; /* Red button */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-post-btn:hover {
+  background-color: #f1ebea; /* Darker red on hover */
+}
+
+
+
+
+/* Remove post button */
+.remove-post-button {
+  position:relative;
+  font-size: 12px; /* Smaller font size */
+  font-style: italic; /* Italic font style */
+  color: #02000e; /* Optional: red color to indicate removal */
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Margin above the button */
+  margin-bottom: 10px; /* Margin below the button */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .post {
+      width: calc(50% - 50px); /* 2 posts in one row */
+  }
+}
+
+@media (max-width: 500px) {
+  .post {
+      width: 100%; /* 1 post per row on smaller screens */
+  }
+}
+
+.form-container{
+  width:450px;
+  padding:1.5rem;
+  margin:50px auto;
+  border-radius:10px;
+  box-shadow:0 20px 35px rgba(0,0,1,0.9);
+}
+form{
+  margin:0 2rem;
+}
+.form-title{
+  font-size:1.5rem;
+  font-weight:bold;
+  text-align:center;
+  padding:1.3rem;
+  margin-bottom:0.4rem;
+}
+input{
+  color:inherit;
+  width:100%;
+  background-color:transparent;
+  border:none;
+  border-bottom:1px solid #757575;
+  padding-left:1.5rem;
+  font-size:15px;
+}
+.input-group{
+  padding:1% 0;
+  position:relative;
+
+}
+.input-group i{
+  position:absolute;
+  color:black;
+}
+input:focus{
+  background-color: transparent;
+  outline:transparent;
+  border-bottom:2px solid hsl(327,90%,28%);
+}
+input::placeholder{
+  color:transparent;
+}
+label{
+  color:#757575;
+  position:relative;
+  left:1.2em;
+  top:-1.3em;
+  cursor:auto;
+  transition:0.3s ease all;
+}
+input:focus~label,input:not(:placeholder-shown)~label{
+  top:-3em;
+  color:hsl(327,90%,28%);
+  font-size:15px;
+}
+.recover{
+  text-align:right;
+  font-size:1rem;
+  margin-bottom:1rem;
+
+}
+.recover a{
+  text-decoration:none;
+  color:rgb(125,125,235);
+}
+.recover a:hover{
+  color:blue;
+  text-decoration:underline;
+}
+
+.btn:hover{
+  background:#07001f;
+}
+.or{
+  font-size:1.1rem;
+  margin-top:0.5rem;
+  text-align:center;
+}
+.icons{
+  text-align:center;
+}
+.icons i{
+  color:rgb(125,125,235);
+  padding:0.8rem 1.5rem;
+  border-radius:10px;
+  font-size:1.5rem;
+  cursor:pointer;
+  border:2px solid #dfe9f5;
+  margin:0 15px;
+  transition:1s;
+}
+.icons i:hover{
+  background:#07001f;
+  font-size:1.6rem;
+  border:2px solid rgb(125,125,235);
+}
+.links{
+  display:flex;
+  justify-content:space-around;
+  padding:0 4rem;
+  margin-top:0.9rem;
+  font-weight:bold;
+}
+button{
+  color:rgb(125,125,235);
+  border:none;
+  background-color:transparent;
+  font-size:1rem;
+  font-weight:bold;
+}
+button:hover{
+  text-decoration:underline;
+  color:blue;
+}
+
+/* Styling the form container */
+/* Form container with border */
+.blog-form {
+  border: 1px solid #428ed9; /* Light blue border */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  max-width: 400px; /* Restrict the form to a small width */
+  margin: 0 auto; /* Center the form */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #80bdff;
+  font-style: italic; /* Italic font for labels */
+}
+
+/* Input and textarea styling */
+.blog-form input[type="file"],
+.blog-form input[type="text"],
+.blog-form textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #80bdff; /* Light blue border */
+  transition: all 0.3s ease;
+  color: #02000e;
+}
+
+/* Highlighted border when input is focused */
+.blog-form input[type="text"]:focus,
+.blog-form textarea:focus,
+.blog-form input[type="file"]:focus {
+  border-color: #428ed9; /* Darker border on focus */
+  outline: none;
+  box-shadow: 0 0 4px rgba(66, 142, 217, 0.5); /* Lighter shadow effect */
+}
+
+/* Textarea specific styling */
+.blog-form textarea {
+  resize: vertical;
+  height: 100px; /* Reduced height for smaller form */
+}
+
+/* Italic style for image upload, title, and description */
+.blog-form input[type="file"],
+.blog-form input[type="text"],
+.blog-form textarea {
+  font-style: italic;
+  color:#428ed9
+}
+
+/* Button styling */
+.submit-btn {
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #428ed9;
+  border-radius: 4px;
+  color: #428ed9; /* Blue text */
+  background-color: transparent; /* Transparent background */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* Button hover effect */
+.submit-btn:hover {
+  background-color: #428ed9; /* Blue background on hover */
+  color: white; /* White text on hover */
+  border-color: #428ed9;
+}
+
+
+
+
+.remove-post-btn {
+  position:relative;
+  font-size: 12px; /* Smaller font size */
+  font-style: italic; /* Italic font style */
+  color: #e2e0ed; /* Optional: red color to indicate removal */
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Margin above the button */
+  margin-bottom: 10px; /* Margin below the button */
+}
+
+.remove-post-btn:hover {
+  text-decoration: underline; /* Underline on hover for better visibility */
+}
+
+
+   
+
+
+        
